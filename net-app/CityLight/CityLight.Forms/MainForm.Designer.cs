@@ -47,7 +47,7 @@
             this.ClientSize = new System.Drawing.Size(1234, 796);
             this.Controls.Add(this.btnCustomers);
             this.Name = "MainForm";
-            this.Text = "Citylight";
+            this.Text = " ";
             this.ResumeLayout(false);
 
         }

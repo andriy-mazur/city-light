@@ -16,11 +16,13 @@ namespace CityLight.Models
         public string Street { get; set; }
         public decimal Latitude { get; set; } 
         public decimal Longitude { get; set; }
-        public string Side1 { get; set; }
-        public string Side1Photo { get; set; }
-        public string Side2 { get; set; }
-        public string Side2Photo { get; set; }
+        
+        [ForeignKey("Side1Id")]
+        public CitylightSide Side1 { get; set; }
 
+        [ForeignKey("Side2Id")]
+        public CitylightSide Side2 { get; set; }
+        
         [ForeignKey("AreaId")]
         public Area Area { get; set; }
 

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CityLight.Repository.Migrations
 {
     [DbContext(typeof(CitylightDbContext))]
-    [Migration("20211108031502_Init")]
+    [Migration("20211205015542_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,9 @@ namespace CityLight.Repository.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
@@ -68,17 +71,11 @@ namespace CityLight.Repository.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Side1")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("Side1Id")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("Side1Photo")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Side2")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Side2Photo")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("Side2Id")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Street")
                         .HasColumnType("TEXT");
@@ -90,7 +87,31 @@ namespace CityLight.Repository.Migrations
 
                     b.HasIndex("AreaId");
 
+                    b.HasIndex("Side1Id");
+
+                    b.HasIndex("Side2Id");
+
                     b.ToTable("Citylights");
+                });
+
+            modelBuilder.Entity("CityLight.Models.CitylightSide", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("IsMain")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Photo")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CitylightSides");
                 });
 
             modelBuilder.Entity("CityLight.Models.Customer", b =>
@@ -106,6 +127,9 @@ namespace CityLight.Repository.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Created")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FullName")
@@ -134,7 +158,19 @@ namespace CityLight.Repository.Migrations
                         .WithMany()
                         .HasForeignKey("AreaId");
 
+                    b.HasOne("CityLight.Models.CitylightSide", "Side1")
+                        .WithMany()
+                        .HasForeignKey("Side1Id");
+
+                    b.HasOne("CityLight.Models.CitylightSide", "Side2")
+                        .WithMany()
+                        .HasForeignKey("Side2Id");
+
                     b.Navigation("Area");
+
+                    b.Navigation("Side1");
+
+                    b.Navigation("Side2");
                 });
 #pragma warning restore 612, 618
         }

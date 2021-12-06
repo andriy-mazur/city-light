@@ -138,3 +138,6 @@ node_modules/
 .vs/
 bin
 obj
+.yarn/
+/ui/.pnp.cjs
+/ui/yarn.lock

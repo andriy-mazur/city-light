@@ -135,3 +135,6 @@ node_modules/
 /net-app/**/bin/
 /net-app/**/obj/
 *.user
+.vs/
+bin
+obj

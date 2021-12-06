@@ -22,11 +22,11 @@ namespace CityLight.Service
         {
             var dbContext = new CitylightDbContext();
 
-            dbContext.Seed();
+            //dbContext.Seed();
 
             var res = dbContext.Customers.Where(c =>
                 c.IsActive &&
-                (string.IsNullOrWhiteSpace(name) || c.Name.Contains(name, StringComparison.InvariantCultureIgnoreCase)));
+                (string.IsNullOrWhiteSpace(name) || c.Name.Contains(name, StringComparison.InvariantCultureIgnoreCase))).Take(100);
 
             return res;
         }
